@@ -1,5 +1,6 @@
 package com.example.Library_Management_System.Services;
 
+import com.example.Library_Management_System.DTOs.BookRequestDto;
 import com.example.Library_Management_System.Models.Author;
 import com.example.Library_Management_System.Models.Book;
 import com.example.Library_Management_System.Repositories.AuthorRepository;
@@ -14,10 +15,17 @@ public class BookService {
 
     @Autowired
     AuthorRepository authorRepository;
-    public String addBook(Book book){
-        int authorId = book.getAuthor().getId();
+    public String addBook(BookRequestDto bookRequestDto){
+        int authorId = bookRequestDto.getAuthorId();
         Author author = authorRepository.findById(authorId).get();
+
+        Book book = new Book();
         book.setAuthor(author);
+        book.setGenre(bookRequestDto.getGenre());
+        book.setName(bookRequestDto.getName());
+        book.setPages(bookRequestDto.getPages());
+        book.setIssued(false);
+
         List<Book> currentBooksWritten = author.getBooksWritten();
         currentBooksWritten.add(book);
         author.setBooksWritten(currentBooksWritten);

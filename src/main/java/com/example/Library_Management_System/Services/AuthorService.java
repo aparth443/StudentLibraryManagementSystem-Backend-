@@ -1,5 +1,6 @@
 package com.example.Library_Management_System.Services;
 
+import com.example.Library_Management_System.DTOs.AuthorEntryDto;
 import com.example.Library_Management_System.Models.Author;
 import com.example.Library_Management_System.Repositories.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,15 @@ public class AuthorService {
     @Autowired
     AuthorRepository authorRepository;
 
-    public String createAuthor(Author author){
+    public String createAuthor(AuthorEntryDto authorEntryDto){
+
+        Author author = new Author();
+
+        author.setName(authorEntryDto.getName());
+        author.setAge(authorEntryDto.getAge());
+        author.setCountry(authorEntryDto.getCountry());
+        author.setRating(authorEntryDto.getRating());
+        
         authorRepository.save(author);
         return "Author added successfully";
     }

@@ -1,6 +1,7 @@
 package com.example.Library_Management_System.Controllers;
 
 
+import com.example.Library_Management_System.DTOs.BookRequestDto;
 import com.example.Library_Management_System.Models.Book;
 import com.example.Library_Management_System.Repositories.BookRepository;
 import com.example.Library_Management_System.Services.BookService;
@@ -17,7 +18,7 @@ public class BookController {
     @Autowired
     BookService bookService;
     @PostMapping("/add")
-    public String addBook(@RequestBody Book book){
-        return bookService.addBook(book);
+    public String addBook(@RequestBody BookRequestDto bookRequestDto){
+        return bookService.addBook(bookRequestDto);
     }
 }
